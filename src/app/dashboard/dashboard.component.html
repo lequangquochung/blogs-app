@@ -9,21 +9,21 @@
     </div>
     <div class="col-sm-1 col-md-12">
       <ul class="list-unstyled">
-        <li class="media" *ngFor="let item of data">
-          <div class="media d-flex justify-content-space">
-            <img class="align-self-center" alt="..." [src]="item.image" width="100px">
+        <li class="media mb-4" *ngFor="let item of data">
+          <div class="d-flex justify-content-space">
+            <img class="align-self-center" alt="..." [src]="item.image" width="128px">
             <div class="media-body ms-5">
               <h5 class="mt-0">{{item?.title}}</h5>
-              <p>{{item.content}}</p>
+              <p class="content-text m-0">{{item.content}}</p>
             </div>
-            <button class="btn btn-outline-primary" (click)="open(item)">Launch demo modal</button>
+            <!-- <button class="btn btn-outline-primary" (click)="open(item)">Launch demo modal</button> -->
           </div>
         </li>
       </ul>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 d-flex justify-content-center">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item">

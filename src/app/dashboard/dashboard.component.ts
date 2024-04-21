@@ -1,10 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-
-import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Blog } from '../models/blog/blog.model';
 import { BlogService } from '../services/blog-service/blog.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { SearchRequest } from '../models/response/response.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent } from '../components/dialog/dialog.component';
 
@@ -19,20 +17,19 @@ export class DashboardComponent implements OnInit {
   currentPageData?: Blog[];
   filteredData: any[] = [];
   searchForm!: FormGroup;
-  items: any[] = []; // Your paginated items array
-  currentPage = 1; // Current page number
-  pages: number = 0; // Array to store page numbers
-  totalPages: number = 0; // Array to store page numbers
+  items: any[] = []; 
+  currentPage = 1;
+  pages: number = 0;
+  totalPages: number = 0; 
 
   public keySearch = new BehaviorSubject<string>('');
-  private txtQueryChanged = new Subject<string>();
   private modalService = inject(NgbModal);
 
   constructor(
     private blogService: BlogService,
     private fb: FormBuilder
   ) {
-    this.searchForm = fb.group({
+    this.searchForm = this.fb.group({
       page: [1],
       limit: [10],
       sortBy: ['id'],
@@ -40,7 +37,7 @@ export class DashboardComponent implements OnInit {
       search: [''],
     })
     this.keySearch.pipe(
-      debounceTime(1000),
+      debounceTime(500),
       distinctUntilChanged()
     )
       .subscribe(value => {
@@ -87,7 +84,6 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
   get pageLinks() {
     const links = [];
     for (let i = 1; i <= (this.keySearch.getValue() ? this.pages : this.totalPages); i++) {
@@ -116,7 +112,7 @@ export class DashboardComponent implements OnInit {
     modalRef.componentInstance.blogDetail = 'World';
     modalRef.componentInstance.blogDetail = blogDetail;
     console.log('blogDetail', blogDetail);
-    
+
   }
 
 }
