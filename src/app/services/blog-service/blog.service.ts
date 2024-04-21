@@ -30,7 +30,7 @@ export class BlogService {
         return this.http.post<any>(this.apiBaseUrl, payload)
     }
 
-    public edit(payload: Blog): Observable<IResponseData<Blog>> {
-        return this.http.put<any>(`${this.apiBaseUrl}/${payload.id}`, payload);
+    public edit(payload: Blog, id: string): Observable<IResponseData<Blog>> {
+        return this.http.put<any>(`${this.apiBaseUrl}/${id}`, payload);
     }
 }

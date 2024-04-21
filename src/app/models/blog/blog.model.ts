@@ -1,6 +1,6 @@
 export interface Blog {
     id?: string;
-    createdAt: Date | string;
+    createdAt?: Date | string;
     title: string;
     image: string;
     content: string;

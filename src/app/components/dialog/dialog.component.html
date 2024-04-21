@@ -1,40 +1,44 @@
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  <h4 class="modal-title">{{ blogDetail?.title ?? "New Blog"}}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
 </div>
 <div class="modal-body">
   <form [formGroup]="blogForm">
     <div class="row">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+      <div class="mb-3">
+        <label for="blogTitle" class="form-label">Title *</label>
+        <input type="text" id="blogTitle" class="form-control" formControlName="title" placeholder="Title...">
+        <div *ngIf="blogForm.get('title')?.errors && blogForm.get('title')?.touched">
+          <div *ngIf="blogForm.get('title')?.hasError('required')">
+            <p class="text-error"> Title is required.</p>
+          </div>
         </div>
-        <input type="text" class="form-control" aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default" formControlName="title">
       </div>
     </div>
     <div class="row">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
-        </div>
-        <input type="text" class="form-control" aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default" formControlName="image">
+      <div class="mb-3">
+        <label for="blogImage" class="form-label d-block">Image</label>
+        <img [src]="blogDetail.image" width="200px" class="mb-3" *ngIf="blogDetail">
+        <input type="text" id="blogImage" class="form-control" formControlName="image"
+          placeholder="Input your image path">
       </div>
     </div>
     <div class="row">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+      <div class="mb-3">
+        <label for="blogContent" class="form-label">Content *</label>
+        <textarea class="form-control" id="blogContent" rows="3" formControlName="content"
+          placeholder="Content..."></textarea>
+        <div *ngIf="blogForm.get('content')?.errors && blogForm.get('content')?.touched">
+          <div *ngIf="blogForm.get('content')?.hasError('required')">
+            <p class="text-error"> Content is required.</p>
+          </div>
         </div>
-        <input type="text" class="form-control" aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default" formControlName="content">
       </div>
     </div>
   </form>
-
 </div>
+
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">Save</button>
+  <button type="button" class="btn btn-outline-success" (click)="onSubmit()" [disabled]="blogForm.invalid">Save</button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

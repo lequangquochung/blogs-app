@@ -1,0 +1,13 @@
+.modal-header {
+    .modal-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.modal-body {
+    .input-group-prepend {
+        width: 5rem;
+    }
+}

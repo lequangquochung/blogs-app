@@ -1,3 +1,9 @@
+.search-bar {
+    .btn-create {
+        width: 6rem;
+    }
+}
+
 .media {
     .content-text {
         -webkit-line-clamp: 3;
@@ -5,5 +11,29 @@
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
+    }
+
+    .media-item {
+        cursor: pointer;
+
+        .block-image {
+            object-fit: cover;
+        }
+    }
+
+    .media-item:hover {
+        background-color: #f5f5f5;
+    }
+
+    .blog-list {
+        .blog-list-item-title {
+            line-height: .25rem;
+        }
+    }
+}
+
+.pagination {
+    .page-link {
+        cursor: pointer;
     }
 }
