@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="header-title text-center">
+      <h1>{{title}} App Blogs</h1>
+    </div>
+    <div class="search-bar mb-3">
+      <input class="form-control" #searchBox type="text" name="keySearch" (input)="onSearch(searchBox.value)"
+        placeholder="Search...">
+    </div>
+    <div class="col-sm-1 col-md-12">
+      <ul class="list-unstyled">
+        <li class="media" *ngFor="let item of data">
+          <div class="media d-flex justify-content-space">
+            <img class="align-self-center" alt="..." [src]="item.image" width="100px">
+            <div class="media-body ms-5">
+              <h5 class="mt-0">{{item?.title}}</h5>
+              <p>{{item.content}}</p>
+            </div>
+            <button class="btn btn-outline-primary" (click)="open(item)">Launch demo modal</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" (click)="setPage(currentPage-1)" *ngIf="currentPage>1">Previous</a>
+          </li>
+          <li class="page-item" *ngFor="let page of pageLinks" [ngClass]="{'active': currentPage == page}">
+            <a class="page-link" (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="setPage(currentPage+1)"
+              *ngIf="currentPage<(keySearch.getValue() ? this.pages : this.totalPages)">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
